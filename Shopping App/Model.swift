@@ -23,7 +23,13 @@ class Model {
         segueArray.append("Finder")
         segueArray.append("Checkout")
         
-        seguesDictionary["Home"] = UIImage(named: "home.png")
+        seguesDictionary["Home"] = UIImage(named: "home")
+        seguesDictionary["List"] = UIImage(named: "list")
+        seguesDictionary["Search"] = UIImage(named: "search")
+        seguesDictionary["Cart"] = UIImage(named: "cart")
+        seguesDictionary["Finder"] = UIImage(named: "finder")
+        seguesDictionary["Checkout"] = UIImage(named: "checkout")
+        
     }
     
     

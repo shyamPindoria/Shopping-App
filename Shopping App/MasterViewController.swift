@@ -62,6 +62,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Set the text in the cell
         cell.textLabel!.text = text
+        cell.imageView!.image = model.seguesDictionary[text]
         
         return cell
     }
