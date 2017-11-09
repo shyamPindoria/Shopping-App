@@ -56,6 +56,8 @@ class Model {
                     newProduct.category = json[count]["category"].string
                     newProduct.uid = json[count]["uid"].string
                     
+                    print(count)
+                    
                     let imgURL = json[count]["image"].string!
                     
                     self.addItemToList(newProduct, imageURL: imgURL)

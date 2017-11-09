@@ -13,6 +13,8 @@
         <scene sceneID="pY4-Hu-kfo">
             <objects>
                 <navigationController title="Master" id="RMx-3f-FxP" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -146,7 +148,7 @@
         <!--Detail-->
         <scene sceneID="qPi-cZ-hTy">
             <objects>
-                <viewController title="Detail" id="dGH-tA-4Co" customClass="DetailViewController" customModule="Shopping_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="dGH-tA-4Co" customClass="ListViewController" customModule="Shopping_App" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JL1-nE-aNP"/>
                         <viewControllerLayoutGuide type="bottom" id="EWW-z4-wOS"/>
@@ -173,7 +175,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="LIST" id="g1Z-0k-sAy"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="XZd-au-Zih" id="nG3-RN-Qyr"/>
+                        <outlet property="label" destination="XZd-au-Zih" id="XdH-s0-ITU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2a-Ig-CKk" sceneMemberID="firstResponder"/>
