@@ -111,6 +111,7 @@ class Model {
             }
             
             storedProducts.append(productToAdd)
+            newProduct.image = UIImage(data: picture!)
             products.append(newProduct)
         }
     }

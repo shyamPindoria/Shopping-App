@@ -8,20 +8,47 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: DetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    
+    @IBOutlet var collectionView: UICollectionView!
     
     let model = SingletonManager.model
     
-    @IBOutlet var label: UILabel!
-    
-    func configureView() {
-        label.text = model.products[0].details
+    func configureCollectionView() {
+        self.collectionView!.dataSource = self
+        self.collectionView!.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        configureView()
+        configureCollectionView()
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return model.products.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Get an instancer of the prototype Cell we created
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
+        
+        // Set the image in the cell
+        cell.imageView.image = model.products[indexPath.row].image
+        
+        // Set the text in the cell
+        cell.label.text = model.products[indexPath.row].name
+        
+        print(cell.label.text)
+        
+        // Return the cell
+        return cell
     }
 
     

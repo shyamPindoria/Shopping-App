@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -115,7 +116,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="SHOPPPING APP" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="SHOPPING APP" id="Zdf-7t-Un8"/>
                     <connections>
                         <segue destination="NyV-14-Jdq" kind="showDetail" identifier="List" id="QTs-oh-JSz"/>
                         <segue destination="Ktf-zQ-aHv" kind="showDetail" identifier="Search" id="GHJ-u6-a7V"/>
@@ -157,30 +158,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XZd-au-Zih">
-                                <rect key="frame" x="20" y="325" width="335" height="17"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4H7-lI-1f2">
+                                <rect key="frame" x="16" y="8" width="343" height="659"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="98c-u7-SN4">
+                                    <size key="itemSize" width="130" height="130"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="YmO-gc-f6y" customClass="Cell" customModule="Shopping_App" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="0.0" width="130" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nJx-7G-Ync">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="108.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCq-EE-FT0">
+                                                    <rect key="frame" x="0.0" y="110.5" width="130" height="19.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="YCq-EE-FT0" firstAttribute="leading" secondItem="YmO-gc-f6y" secondAttribute="leading" id="MCD-9w-Ldc"/>
+                                            <constraint firstAttribute="trailing" secondItem="YCq-EE-FT0" secondAttribute="trailing" id="fvh-B5-sB2"/>
+                                            <constraint firstAttribute="bottom" secondItem="YCq-EE-FT0" secondAttribute="bottom" id="hli-eh-dKM"/>
+                                            <constraint firstItem="YCq-EE-FT0" firstAttribute="top" secondItem="nJx-7G-Ync" secondAttribute="bottom" constant="2" id="jjv-j2-nQF"/>
+                                            <constraint firstItem="nJx-7G-Ync" firstAttribute="leading" secondItem="YmO-gc-f6y" secondAttribute="leading" id="lai-PG-3o8"/>
+                                            <constraint firstAttribute="trailing" secondItem="nJx-7G-Ync" secondAttribute="trailing" id="tz7-xv-5OT"/>
+                                            <constraint firstItem="nJx-7G-Ync" firstAttribute="top" secondItem="YmO-gc-f6y" secondAttribute="top" id="wLc-S5-0Wv"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="nJx-7G-Ync" id="gEM-E9-7iP"/>
+                                            <outlet property="label" destination="YCq-EE-FT0" id="2JF-zS-zj3"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="XZd-au-Zih" secondAttribute="trailing" constant="20" symbolic="YES" id="F4P-C3-koc"/>
-                            <constraint firstItem="XZd-au-Zih" firstAttribute="leading" secondItem="59Q-BS-pt7" secondAttribute="leading" constant="20" symbolic="YES" id="Ndz-wY-4ap"/>
-                            <constraint firstItem="XZd-au-Zih" firstAttribute="centerY" secondItem="59Q-BS-pt7" secondAttribute="centerY" id="Vfg-pN-iQQ"/>
+                            <constraint firstItem="4H7-lI-1f2" firstAttribute="top" secondItem="59Q-BS-pt7" secondAttribute="topMargin" constant="8" id="K9H-mP-fE3"/>
+                            <constraint firstItem="EWW-z4-wOS" firstAttribute="top" secondItem="4H7-lI-1f2" secondAttribute="bottom" id="YOA-mR-43a"/>
+                            <constraint firstItem="4H7-lI-1f2" firstAttribute="leading" secondItem="59Q-BS-pt7" secondAttribute="leadingMargin" id="nka-Px-Re1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4H7-lI-1f2" secondAttribute="trailing" id="zhr-Kd-VBo"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="LIST" id="g1Z-0k-sAy"/>
                     <connections>
-                        <outlet property="label" destination="XZd-au-Zih" id="XdH-s0-ITU"/>
+                        <outlet property="collectionView" destination="4H7-lI-1f2" id="1CT-ye-IMT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2a-Ig-CKk" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="895"/>
+            <point key="canvasLocation" x="708" y="894.60269865067471"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1kv-U8-vCa">
