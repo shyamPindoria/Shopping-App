@@ -17,6 +17,8 @@ class Model {
     var products = [Product]()
     var storedProducts = [NSManagedObject]()
     
+    var cart = [Product]()
+    
     init() {
         
         segueArray.append("Home")
@@ -33,7 +35,44 @@ class Model {
         seguesDictionary["Finder"] = UIImage(named: "finder")
         seguesDictionary["Checkout"] = UIImage(named: "checkout")
         
+        self.loadProducts()
         self.refreshProducts()
+        print("Items in products array: \(products.count)")
+    }
+    
+    func loadProducts() {
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Products")
+        
+        do {
+            
+            let results = try managedContext.fetch(fetchRequest)
+            storedProducts = results as! [NSManagedObject]
+            
+            if storedProducts.count > 0 {
+                for index in 0...storedProducts.count - 1 {
+                    
+                    let binaryData = storedProducts[index].value(forKey: "image") as! Data
+                    let image = UIImage(data: binaryData)
+                    
+                    let name = storedProducts[index].value(forKey: "name") as! String
+                    let price = storedProducts[index].value(forKey: "price") as! Double
+                    let details = storedProducts[index].value(forKey: "details") as! String
+                    let category = storedProducts[index].value(forKey: "category") as! String
+                    let uid = storedProducts[index].value(forKey: "uid") as! String
+                    
+                    let loadedProduct = Product(name: name, price: price, image: image!, details: details, category: category, uid: uid)
+                    
+                    products.append(loadedProduct)
+                    
+                }
+            }
+        }
+        catch let error as NSError
+        {
+            print("Could not load. \(error), \(error.userInfo)")
+        }
     }
     
     func refreshProducts() {
@@ -51,7 +90,7 @@ class Model {
                 {
                     let newProduct = Product()
                     newProduct.name = json[count]["name"].string
-                    newProduct.price = json[count]["price"].double
+                    newProduct.price = Double(json[count]["price"].string!)
                     newProduct.details = json[count]["description"].string
                     newProduct.category = json[count]["category"].string
                     newProduct.uid = json[count]["uid"].string
@@ -113,6 +152,7 @@ class Model {
             storedProducts.append(productToAdd)
             newProduct.image = UIImage(data: picture!)
             products.append(newProduct)
+
         }
     }
     
