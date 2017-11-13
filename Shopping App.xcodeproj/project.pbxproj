@@ -14,6 +14,8 @@
 		520C93021FA7066500AA7C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520C93001FA7066500AA7C8E /* Main.storyboard */; };
 		520C93041FA7066500AA7C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 520C93031FA7066500AA7C8E /* Assets.xcassets */; };
 		520C93071FA7066500AA7C8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520C93051FA7066500AA7C8E /* LaunchScreen.storyboard */; };
+		5239C91F1FB99DEA0062A993 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5239C91E1FB99DEA0062A993 /* background.jpg */; };
+		5239C9211FB9A3B60062A993 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239C9201FB9A3B60062A993 /* HomeViewController.swift */; };
 		52D843571FB425570055FA82 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D843561FB425570055FA82 /* SwiftyJSON.swift */; };
 		52D843591FB425CE0055FA82 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D843581FB425CE0055FA82 /* Product.swift */; };
 		52D8435B1FB46D800055FA82 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8435A1FB46D800055FA82 /* ListViewController.swift */; };
@@ -32,6 +34,8 @@
 		520C93031FA7066500AA7C8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		520C93061FA7066500AA7C8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		520C93081FA7066500AA7C8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5239C91E1FB99DEA0062A993 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		5239C9201FB9A3B60062A993 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		52D843561FB425570055FA82 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		52D843581FB425CE0055FA82 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		52D8435A1FB46D800055FA82 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -78,14 +82,24 @@
 				52FDA0531FB2D2A20059A25A /* SingletonManager.swift */,
 				520C92FE1FA7066500AA7C8E /* DetailViewController.swift */,
 				520C93001FA7066500AA7C8E /* Main.storyboard */,
+				5239C9201FB9A3B60062A993 /* HomeViewController.swift */,
 				52D8435A1FB46D800055FA82 /* ListViewController.swift */,
 				52D843581FB425CE0055FA82 /* Product.swift */,
 				520C93031FA7066500AA7C8E /* Assets.xcassets */,
+				5239C91D1FB99DCE0062A993 /* Supporting Files */,
 				520C93051FA7066500AA7C8E /* LaunchScreen.storyboard */,
 				520C93081FA7066500AA7C8E /* Info.plist */,
 				520C92F91FA7066500AA7C8E /* Shopping_App.xcdatamodeld */,
 			);
 			path = "Shopping App";
+			sourceTree = "<group>";
+		};
+		5239C91D1FB99DCE0062A993 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5239C91E1FB99DEA0062A993 /* background.jpg */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				520C93071FA7066500AA7C8E /* LaunchScreen.storyboard in Resources */,
+				5239C91F1FB99DEA0062A993 /* background.jpg in Resources */,
 				520C93041FA7066500AA7C8E /* Assets.xcassets in Resources */,
 				520C93021FA7066500AA7C8E /* Main.storyboard in Resources */,
 			);
@@ -167,6 +182,7 @@
 				52D843571FB425570055FA82 /* SwiftyJSON.swift in Sources */,
 				520C92FB1FA7066500AA7C8E /* Shopping_App.xcdatamodeld in Sources */,
 				520C92FD1FA7066500AA7C8E /* MasterViewController.swift in Sources */,
+				5239C9211FB9A3B60062A993 /* HomeViewController.swift in Sources */,
 				520C92FF1FA7066500AA7C8E /* DetailViewController.swift in Sources */,
 				52D8435B1FB46D800055FA82 /* ListViewController.swift in Sources */,
 				52FDA0541FB2D2A20059A25A /* SingletonManager.swift in Sources */,

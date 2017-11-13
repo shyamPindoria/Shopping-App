@@ -45,8 +45,6 @@ class ListViewController: DetailViewController, UICollectionViewDataSource, UICo
         // Set the text in the cell
         cell.label.text = model.products[indexPath.row].name
         
-        print(cell.label.text)
-        
         // Return the cell
         return cell
     }
