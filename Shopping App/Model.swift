@@ -17,7 +17,7 @@ class Model {
     var products = [Product]()
     var storedProducts = [NSManagedObject]()
     
-    var cart = [Product]()
+    var cart = Dictionary<Product, Dictionary<String, Int>>()
     
     init() {
         
@@ -37,7 +37,6 @@ class Model {
         
         self.loadProducts()
         self.refreshProducts()
-        print("Items in products array: \(products.count)")
     }
     
     func loadProducts() {
@@ -94,8 +93,6 @@ class Model {
                     newProduct.details = json[count]["description"].string
                     newProduct.category = json[count]["category"].string
                     newProduct.uid = json[count]["uid"].string
-                    
-                    print(count)
                     
                     let imgURL = json[count]["image"].string!
                     
@@ -154,6 +151,14 @@ class Model {
             products.append(newProduct)
 
         }
+    }
+    
+    func addToCart(product: Product, quantity: Int, finish: Int, material: Int) {
+        var temp = Dictionary<String, Int>()
+        temp["Quantity"] = quantity
+        temp["Finish"] = finish
+        temp["Material"] = material
+        cart[product] = temp
     }
     
     func loadImage(_ imageURL: String) -> UIImage {

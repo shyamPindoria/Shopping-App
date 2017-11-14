@@ -26,6 +26,22 @@ class ListViewController: DetailViewController, UICollectionViewDataSource, UICo
         configureCollectionView()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let indexPath = self.collectionView?.indexPath(for: sender as! Cell)
+        
+        let detailView = (segue.destination as! UINavigationController).topViewController as! ProductViewController
+        
+        let product = model.products[indexPath!.row]
+        
+        detailView.productItem = product
+        detailView.originalPrice = product.price
+        
+        detailView.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+        detailView.navigationItem.leftItemsSupplementBackButton = true
+        
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
