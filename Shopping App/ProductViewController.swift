@@ -85,7 +85,7 @@ class ProductViewController: DetailViewController {
     
     @IBAction func addToCart(_ sender: Any) {
         if let product = self.productItem {
-            model.addToCart(product: product, quantity: quantity, finish: finishSegment.selectedSegmentIndex, material: materialSegment.selectedSegmentIndex)
+            model.addToCart(product: product, quantity: Double(quantity), finish: Double(finishSegment.selectedSegmentIndex), material: Double(materialSegment.selectedSegmentIndex), totalPrice: totalPrice)
         }
     }
     

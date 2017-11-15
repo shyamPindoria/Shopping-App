@@ -17,7 +17,8 @@ class Model {
     var products = [Product]()
     var storedProducts = [NSManagedObject]()
     
-    var cart = Dictionary<Product, Dictionary<String, Int>>()
+    var cart = [[Double]]()
+    var storedCart = [NSManagedObject]()
     
     init() {
         
@@ -37,6 +38,7 @@ class Model {
         
         self.loadProducts()
         self.refreshProducts()
+        self.loadCart()
     }
     
     func loadProducts() {
@@ -153,12 +155,67 @@ class Model {
         }
     }
     
-    func addToCart(product: Product, quantity: Int, finish: Int, material: Int) {
-        var temp = Dictionary<String, Int>()
-        temp["Quantity"] = quantity
-        temp["Finish"] = finish
-        temp["Material"] = material
-        cart[product] = temp
+    func loadCart() {
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Cart")
+        
+        print("Load Cart")
+        
+        do {
+            
+            let results = try managedContext.fetch(fetchRequest)
+            storedCart = results as! [NSManagedObject]
+            
+            if storedCart.count > 0 {
+                for index in 0...storedCart.count - 1 {
+                    
+                    let product = storedCart[index].value(forKey: "product") as! Double
+                    let quantity = storedCart[index].value(forKey: "quantity") as! Double
+                    let finish = storedCart[index].value(forKey: "finish") as! Double
+                    let material = storedCart[index].value(forKey: "material") as! Double
+                    let totalPrice = storedCart[index].value(forKey: "total") as! Double
+                    
+                    let temp = [product, quantity, finish, material, totalPrice]
+                    
+                    print(product)
+                    
+                    cart.append(temp)
+    
+                }
+            }
+        }
+        catch let error as NSError
+        {
+            print("Could not load. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    func addToCart(product: Product, quantity: Double, finish: Double, material: Double, totalPrice: Double) {
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Cart", in: managedContext)
+        let productToAdd = NSManagedObject(entity: entity!, insertInto: managedContext)
+        productToAdd.setValue(checkForProduct(product), forKey: "product")
+        productToAdd.setValue(quantity, forKey: "quantity")
+        productToAdd.setValue(finish, forKey: "finish")
+        productToAdd.setValue(material, forKey: "material")
+        productToAdd.setValue(totalPrice, forKey: "total")
+        
+        do
+        {
+            try managedContext.save()
+        }
+        catch let error as NSError
+        {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+        let temp = [Double(checkForProduct(product)), quantity, finish, material, totalPrice]
+        
+        storedCart.append(productToAdd)
+        cart.append(temp)
+        
     }
     
     func loadImage(_ imageURL: String) -> UIImage {
