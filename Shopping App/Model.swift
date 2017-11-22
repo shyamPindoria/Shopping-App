@@ -20,6 +20,8 @@ class Model {
     var cart = [[Double]]()
     var storedCart = [NSManagedObject]()
     
+    var pickUpLocations = [Dictionary<String, String>]()
+    
     init() {
         
         segueArray.append("Home")
@@ -39,6 +41,7 @@ class Model {
         self.loadProducts()
         self.refreshProducts()
         self.loadCart()
+        self.refreshPickUpLocations()
     }
     
     func loadProducts() {
@@ -226,5 +229,9 @@ class Model {
             }
         }
         return image!
+    }
+    
+    func refreshPickUpLocations() {
+        
     }
 }

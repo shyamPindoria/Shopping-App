@@ -16,6 +16,7 @@
 		520C93071FA7066500AA7C8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520C93051FA7066500AA7C8E /* LaunchScreen.storyboard */; };
 		5239C91F1FB99DEA0062A993 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5239C91E1FB99DEA0062A993 /* background.jpg */; };
 		5239C9211FB9A3B60062A993 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239C9201FB9A3B60062A993 /* HomeViewController.swift */; };
+		5254449A1FC52CF100ECE7C4 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525444991FC52CF100ECE7C4 /* CheckoutViewController.swift */; };
 		52D843571FB425570055FA82 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D843561FB425570055FA82 /* SwiftyJSON.swift */; };
 		52D843591FB425CE0055FA82 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D843581FB425CE0055FA82 /* Product.swift */; };
 		52D8435B1FB46D800055FA82 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8435A1FB46D800055FA82 /* ListViewController.swift */; };
@@ -39,6 +40,7 @@
 		520C93081FA7066500AA7C8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5239C91E1FB99DEA0062A993 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		5239C9201FB9A3B60062A993 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		525444991FC52CF100ECE7C4 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		52D843561FB425570055FA82 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		52D843581FB425CE0055FA82 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		52D8435A1FB46D800055FA82 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				520C93001FA7066500AA7C8E /* Main.storyboard */,
 				52DA0A6C1FBC332B0025DDF1 /* CartCell.swift */,
 				52DA0A6A1FBC0E950025DDF1 /* CartViewController.swift */,
+				525444991FC52CF100ECE7C4 /* CheckoutViewController.swift */,
 				52E246AB1FBAB52E00B9992C /* ProductViewController.swift */,
 				5239C9201FB9A3B60062A993 /* HomeViewController.swift */,
 				52D8435A1FB46D800055FA82 /* ListViewController.swift */,
@@ -197,6 +200,7 @@
 				5239C9211FB9A3B60062A993 /* HomeViewController.swift in Sources */,
 				520C92FF1FA7066500AA7C8E /* DetailViewController.swift in Sources */,
 				52D8435B1FB46D800055FA82 /* ListViewController.swift in Sources */,
+				5254449A1FC52CF100ECE7C4 /* CheckoutViewController.swift in Sources */,
 				52FDA0541FB2D2A20059A25A /* SingletonManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
