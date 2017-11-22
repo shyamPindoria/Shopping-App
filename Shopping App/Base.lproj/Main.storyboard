@@ -330,7 +330,7 @@
         <!--Detail-->
         <scene sceneID="RdQ-Cb-YVv">
             <objects>
-                <viewController title="Detail" id="Hnb-kr-Myq" customClass="CheckoutViewContoller" customModule="Shopping_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="Hnb-kr-Myq" customClass="CartViewContoller" customModule="Shopping_App" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="COm-Gj-mvs"/>
                         <viewControllerLayoutGuide type="bottom" id="a1e-bH-tm8"/>

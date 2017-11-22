@@ -1,5 +1,5 @@
 //
-//  CheckoutViewController.swift
+//  CartViewController.swift
 //  Shopping App
 //
 //  Created by Shyam Pindoria on 15/11/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewContoller: DetailViewController, UITableViewDataSource, UITableViewDelegate {
+class CartViewContoller: DetailViewController, UITableViewDataSource, UITableViewDelegate {
  
     let model = SingletonManager.model
     
