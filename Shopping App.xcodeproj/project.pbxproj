@@ -19,6 +19,7 @@
 		5254449A1FC52CF100ECE7C4 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525444991FC52CF100ECE7C4 /* CheckoutViewController.swift */; };
 		5254449E1FC6687C00ECE7C4 /* delivery.png in Resources */ = {isa = PBXBuildFile; fileRef = 5254449D1FC6687C00ECE7C4 /* delivery.png */; };
 		525444A01FC66B9400ECE7C4 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5254449F1FC66B9400ECE7C4 /* ConfirmationViewController.swift */; };
+		525444A21FC69A0000ECE7C4 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525444A11FC69A0000ECE7C4 /* FinderViewController.swift */; };
 		52D843571FB425570055FA82 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D843561FB425570055FA82 /* SwiftyJSON.swift */; };
 		52D843591FB425CE0055FA82 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D843581FB425CE0055FA82 /* Product.swift */; };
 		52D8435B1FB46D800055FA82 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8435A1FB46D800055FA82 /* ListViewController.swift */; };
@@ -45,6 +46,7 @@
 		525444991FC52CF100ECE7C4 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		5254449D1FC6687C00ECE7C4 /* delivery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delivery.png; sourceTree = "<group>"; };
 		5254449F1FC66B9400ECE7C4 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		525444A11FC69A0000ECE7C4 /* FinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderViewController.swift; sourceTree = "<group>"; };
 		52D843561FB425570055FA82 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		52D843581FB425CE0055FA82 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		52D8435A1FB46D800055FA82 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				52FDA0531FB2D2A20059A25A /* SingletonManager.swift */,
 				520C92FE1FA7066500AA7C8E /* DetailViewController.swift */,
 				520C93001FA7066500AA7C8E /* Main.storyboard */,
+				525444A11FC69A0000ECE7C4 /* FinderViewController.swift */,
 				5254449F1FC66B9400ECE7C4 /* ConfirmationViewController.swift */,
 				52DA0A6C1FBC332B0025DDF1 /* CartCell.swift */,
 				52DA0A6A1FBC0E950025DDF1 /* CartViewController.swift */,
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525444A21FC69A0000ECE7C4 /* FinderViewController.swift in Sources */,
 				52FDA0521FB2D0100059A25A /* Model.swift in Sources */,
 				52DA0A6D1FBC332B0025DDF1 /* CartCell.swift in Sources */,
 				52DA0A6B1FBC0E950025DDF1 /* CartViewController.swift in Sources */,
