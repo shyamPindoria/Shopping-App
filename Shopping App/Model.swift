@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
-class Model {
+class Model: NSObject, CLLocationManagerDelegate {
     
     var segueArray = [String]()
     var seguesDictionary = Dictionary<String, UIImage>()
@@ -20,9 +21,13 @@ class Model {
     var cart = [[Double]]()
     var storedCart = [NSManagedObject]()
     
-    var pickUpLocations = [Dictionary<String, String>]()
+    var pickUpLocations = [[String: String]]()
     
-    init() {
+    let locationManager = CLLocationManager()
+    
+    override init() {
+        
+        super.init()
         
         segueArray.append("Home")
         segueArray.append("List")
@@ -41,7 +46,7 @@ class Model {
         self.loadProducts()
         self.refreshProducts()
         self.loadCart()
-        self.refreshPickUpLocations()
+        self.configureLocManager()
     }
     
     func loadProducts() {
@@ -87,27 +92,23 @@ class Model {
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: url! as URL, completionHandler:
         {(data, response, error) in
-            do {
-                let json = try JSON(data: data!)
-                
-                for count in 0...json.count - 1
-                {
-                    let newProduct = Product()
-                    newProduct.name = json[count]["name"].string
-                    newProduct.price = Double(json[count]["price"].string!)
-                    newProduct.details = json[count]["description"].string
-                    newProduct.category = json[count]["category"].string
-                    newProduct.uid = json[count]["uid"].string
-                    
-                    let imgURL = json[count]["image"].string!
-                    
-                    self.addItemToList(newProduct, imageURL: imgURL)
-                }
-            }
-            catch let error as NSError
+            
+            let json = JSON(data: data!)
+            
+            for count in 0...json.count - 1
             {
-                print("Could not convert. \(error), \(error.userInfo)")
+                let newProduct = Product()
+                newProduct.name = json[count]["name"].string
+                newProduct.price = Double(json[count]["price"].string!)
+                newProduct.details = json[count]["description"].string
+                newProduct.category = json[count]["category"].string
+                newProduct.uid = json[count]["uid"].string
+                
+                let imgURL = json[count]["image"].string!
+                
+                self.addItemToList(newProduct, imageURL: imgURL)
             }
+            
         })
         task.resume()
     }
@@ -154,7 +155,7 @@ class Model {
             storedProducts.append(productToAdd)
             newProduct.image = UIImage(data: picture!)
             products.append(newProduct)
-
+            
         }
     }
     
@@ -162,8 +163,6 @@ class Model {
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Cart")
-        
-        print("Load Cart")
         
         do {
             
@@ -181,10 +180,8 @@ class Model {
                     
                     let temp = [product, quantity, finish, material, totalPrice]
                     
-                    print(product)
-                    
                     cart.append(temp)
-    
+                    
                 }
             }
         }
@@ -221,6 +218,37 @@ class Model {
         
     }
     
+    func clearCart() {
+        
+        cart.removeAll()
+        
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Cart")
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        
+        do
+        {
+            try managedContext.execute(request)
+            try managedContext.save()
+        }
+        catch let error as NSError
+        {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    func calculateCartTotal() -> Double{
+        var total = 0.0
+        if self.cart.count > 0 {
+            for index in 0...self.cart.count - 1 {
+                total += cart[index][4]
+            }
+        }
+        return total
+    }
+    
     func loadImage(_ imageURL: String) -> UIImage {
         var image: UIImage!
         if let url = NSURL(string: imageURL) {
@@ -231,7 +259,53 @@ class Model {
         return image!
     }
     
-    func refreshPickUpLocations() {
+    func configureLocManager(){
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            refreshPickUpLocations()
+        }
         
     }
+    
+    func refreshPickUpLocations() {
+        
+        self.pickUpLocations.removeAll(keepingCapacity: false)
+        
+        let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
+        
+        let url = NSURL(string: "http://partiklezoo.com/3dprinting/?action=locations&coord1=\(locValue.latitude)&coord2=\(locValue.longitude)")
+        let config = URLSessionConfiguration.default
+        config.isDiscretionary = true
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: url! as URL, completionHandler:
+        {(data, response, error) in
+            
+            let json = JSON(data: data!)
+            
+            for count in 0...json.count - 1
+            {
+                var location = [String: String]()
+                
+                location["street"] = json[count]["street"].string
+                location["suburb"] = json[count]["suburb"].string
+                location["postcode"] = json[count]["postcode"].string
+                location["state"] = json[count]["state"].string
+                location["countrycode"] = json[count]["countrycode"].string
+                location["uid"] = json[count]["uid"].string
+                
+                self.pickUpLocations.append(location)
+
+            }
+            
+        })
+        task.resume()
+    }
+    
+    
 }

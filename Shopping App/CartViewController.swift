@@ -23,7 +23,7 @@ class CartViewContoller: DetailViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         
-        calculateTotal()
+        displayTotal()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,7 +62,7 @@ class CartViewContoller: DetailViewController, UITableViewDataSource, UITableVie
             {
                 try managedContext.save()
                 tableView.reloadData()
-                calculateTotal()
+                displayTotal()
             }
             catch let error as NSError
             {
@@ -77,15 +77,8 @@ class CartViewContoller: DetailViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    
-    func calculateTotal() {
-        var total = 0.0
-        if model.cart.count > 0 {
-            for index in 0...model.cart.count - 1 {
-                total += model.cart[index][4]
-            }
-        }
-        totalLabel.text = "$" + String(format: "%.2f", total)
+    func displayTotal() {
+        self.totalLabel.text = "$" + String(format: "%.2f", model.calculateCartTotal())
     }
     
     @IBAction func editTable(_ sender: UIBarButtonItem) {
@@ -97,6 +90,20 @@ class CartViewContoller: DetailViewController, UITableViewDataSource, UITableVie
                 sender.title = "Done"
                 self.tableView.setEditing(true, animated: true)
             }
+        }
+    }
+    
+    @IBAction func checkout(_ sender: UIButton) {
+        if model.cart.count == 0 {
+            let alert = UIAlertController.init(title: "Your cart is empty", message: "Please add an item in your cart before you checkout.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Browse items", style: .default, handler: { _ in
+                self.performSegue(withIdentifier: "List", sender: sender)
+            }))
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            self.performSegue(withIdentifier: "Checkout", sender: sender)
         }
     }
     
