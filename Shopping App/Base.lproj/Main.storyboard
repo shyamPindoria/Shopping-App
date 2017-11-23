@@ -302,12 +302,20 @@
             <objects>
                 <tableViewController definesPresentationContext="YES" id="gHr-LF-uu3" customClass="SearchViewController" customModule="Shopping_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="akZ-3u-nYs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Gmu-L0-bBU">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="gHr-LF-uu3" id="r3s-Ov-NZp"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="Mmq-Jo-n6k" style="IBUITableViewCellStyleDefault" id="Zes-LH-WDH">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zes-LH-WDH" id="2TQ-oS-v3O">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -332,18 +340,21 @@
                             <outlet property="delegate" destination="gHr-LF-uu3" id="HgU-Z5-iSb"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="SEARCH" id="fE7-Hm-2qg"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="18Z-bU-7z7" id="ElL-a3-ByW"/>
+                        <outlet property="searchBar" destination="Gmu-L0-bBU" id="1f7-ZC-HOh"/>
+                        <outlet property="searchDisplayController" destination="hDj-54-i2a" id="vjC-af-jhh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vQ0-8j-gAT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="18Z-bU-7z7">
+                <searchDisplayController id="hDj-54-i2a">
                     <connections>
-                        <outlet property="delegate" destination="gHr-LF-uu3" id="pj5-0Y-62t"/>
-                        <outlet property="searchContentsController" destination="gHr-LF-uu3" id="HNL-HM-6XS"/>
-                        <outlet property="searchResultsDataSource" destination="gHr-LF-uu3" id="zBl-3g-EE7"/>
-                        <outlet property="searchResultsDelegate" destination="gHr-LF-uu3" id="Cp1-ii-a39"/>
+                        <outlet property="delegate" destination="gHr-LF-uu3" id="BX5-rb-hsC"/>
+                        <outlet property="searchBar" destination="Gmu-L0-bBU" id="pLt-9R-p9a"/>
+                        <outlet property="searchContentsController" destination="gHr-LF-uu3" id="Pmo-CO-4hD"/>
+                        <outlet property="searchResultsDataSource" destination="gHr-LF-uu3" id="0vc-Mv-6GR"/>
+                        <outlet property="searchResultsDelegate" destination="gHr-LF-uu3" id="B7l-N4-sVx"/>
                     </connections>
                 </searchDisplayController>
             </objects>

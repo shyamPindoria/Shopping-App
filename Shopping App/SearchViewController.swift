@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController, UISearchResultsUpdating {
+class SearchViewController: UITableViewController, UISearchBarDelegate {
     
-    var searchController: UISearchController!
-    
-    var resultsController = UITableViewController()
+    @IBOutlet var searchBar: UISearchBar!
     
     var filteredProducts = [Product]()
+    
+    var isSearching = false
     
     let model = SingletonManager.model
     
@@ -22,49 +22,37 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
         
         super.viewDidLoad()
         
-        self.resultsController.tableView.dataSource = self
-        self.resultsController.tableView.delegate = self
-        
-        self.searchController = UISearchController(searchResultsController: self.resultsController)
-        self.tableView.tableHeaderView = self.searchController.searchBar
-        self.searchController.searchResultsUpdater = self
-        
-        
+        searchBar.delegate = self
         
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
+    func updateSearchResults() {
         
         self.filteredProducts = self.model.products.filter({ (product: Product) -> Bool in
-            if product.name.lowercased().contains(self.searchController.searchBar.text!.lowercased()) {
+            if product.name.lowercased().contains(self.searchBar.text!.lowercased()) {
                 return true
             } else {
                 return false
             }
         })
         
-        self.resultsController.tableView.reloadData()
+        self.tableView.reloadData()
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         var product = Product()
+        let indexPath = sender as! IndexPath
         
-        if sender as! UITableView == self.tableView {
-            let indexPath = self.tableView.indexPathForSelectedRow
-            product = self.model.products[indexPath!.row]
+        if self.isSearching {
+            product = self.filteredProducts[indexPath.row]
         }
         else {
-            let indexPath = self.resultsController.tableView.indexPathForSelectedRow
-            product = self.filteredProducts[indexPath!.row]
+            product = self.model.products[indexPath.row]
         }
         
-        
-        
         let detailView = (segue.destination as! UINavigationController).topViewController as! ProductViewController
-        
-        
         
         detailView.productItem = product
         detailView.originalPrice = product.price
@@ -78,29 +66,50 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == self.tableView {
-            return self.model.products.count
-        } else {
+        if self.isSearching {
             return self.filteredProducts.count
+        } else {
+            return self.model.products.count
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         
-        if tableView == self.tableView {
-            cell.textLabel?.text = self.model.products[indexPath.row].name
-        } else {
+        if self.isSearching {
             cell.textLabel?.text = self.filteredProducts[indexPath.row].name
+        } else {
+            cell.textLabel?.text = self.model.products[indexPath.row].name
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "Product", sender: tableView)
         
-        print("didselect")
+        self.performSegue(withIdentifier: "Product", sender: indexPath)
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text == nil || searchBar.text == "" {
+            
+            self.isSearching = false
+            self.tableView.reloadData()
+            
+        } else {
+            
+            self.isSearching = true
+            self.updateSearchResults()
+            
+        }
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.isSearching = false
+        self.tableView.reloadData()
     }
     
 }
