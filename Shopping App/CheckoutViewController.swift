@@ -41,7 +41,7 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
     
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

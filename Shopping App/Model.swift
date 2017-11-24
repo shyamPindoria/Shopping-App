@@ -275,7 +275,7 @@ class Model: NSObject, CLLocationManagerDelegate {
     
     func refreshPickUpLocations() {
         
-        self.pickUpLocations.removeAll(keepingCapacity: false)
+        self.pickUpLocations.removeAll()
         
         let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
         

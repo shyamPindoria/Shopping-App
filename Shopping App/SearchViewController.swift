@@ -8,9 +8,11 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController, UISearchBarDelegate {
+class SearchViewController: DetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     @IBOutlet var searchBar: UISearchBar!
+    
+    @IBOutlet var collectionView: UICollectionView!
     
     var filteredProducts = [Product]()
     
@@ -22,7 +24,10 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         
         super.viewDidLoad()
         
-        searchBar.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        
+        self.searchBar.delegate = self
         
     }
     
@@ -36,20 +41,20 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
             }
         })
         
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         var product = Product()
-        let indexPath = sender as! IndexPath
+        let indexPath = self.collectionView?.indexPath(for: sender as! Cell)
         
         if self.isSearching {
-            product = self.filteredProducts[indexPath.row]
+            product = self.filteredProducts[indexPath!.row]
         }
         else {
-            product = self.model.products[indexPath.row]
+            product = self.model.products[indexPath!.row]
         }
         
         let detailView = (segue.destination as! UINavigationController).topViewController as! ProductViewController
@@ -60,43 +65,43 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if self.isSearching {
             return self.filteredProducts.count
         } else {
             return self.model.products.count
         }
+        
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! Cell
         
         if self.isSearching {
-            cell.textLabel?.text = self.filteredProducts[indexPath.row].name
+            cell.label.text = self.filteredProducts[indexPath.row].name
+            cell.imageView.image = self.filteredProducts[indexPath.row].image
         } else {
-            cell.textLabel?.text = self.model.products[indexPath.row].name
+            cell.label.text = self.model.products[indexPath.row].name
+            cell.imageView.image = self.model.products[indexPath.row].image
         }
         
         return cell
+        
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        self.performSegue(withIdentifier: "Product", sender: indexPath)
-        
-    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchBar.text == nil || searchBar.text == "" {
             
             self.isSearching = false
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
             
         } else {
             
@@ -108,8 +113,13 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.view.endEditing(true)
         self.isSearching = false
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
+        
     }
+    
+    
     
 }
