@@ -105,7 +105,9 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
         
         
         if error.isEmpty {
+            
             showAlertMsg("Confirm Purchase", message: "Pay " + labelTotalPrice.text!, style: UIAlertControllerStyle.actionSheet)
+            
         }
         else {
             showAlertMsg("Error", message: error, style: UIAlertControllerStyle.alert)
@@ -134,17 +136,44 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
     }
     
     func checkout() {
-        self.cardNumber.text = ""
-        self.cardExpiryMonth.text = ""
-        self.cardExpiryYear.text = ""
-        self.cardCvv.text = ""
         
-        self.labelTotalPrice.text = "$0.00"
+        var success = false
         
-        self.model.clearCart()
-        self.tableViewOrderDetails.reloadData()
+        for count in 0...self.model.cart.count - 1 {
+            
+            let product = self.model.products[Int(self.model.cart[count][0])]
+            let quantity = Int(self.model.cart[count][1])
+            let total = self.model.cart[count][4]
+            let material = self.model.cart[count][3] == 0.0 ? "pla" : "abs"
+            let painting = self.model.cart[count][2] == 0.0 ? "false" : "true"
+            
+            
+            success = self.model.purchase(product: product, quantity: quantity, total: total, material: material, painting: painting)
+            
+            if !success {
+                let error = "Oops! Something went wrong. Please try again later."
+                showAlertMsg("Error", message: error, style: UIAlertControllerStyle.alert)
+                
+            } else {
+                print("Success! Checkout complete.")
+                
+                self.cardNumber.text = ""
+                self.cardExpiryMonth.text = ""
+                self.cardExpiryYear.text = ""
+                self.cardCvv.text = ""
+                
+                self.labelTotalPrice.text = "$0.00"
+                
+                self.model.clearCart()
+                self.tableViewOrderDetails.reloadData()
+                
+                self.performSegue(withIdentifier: "Thankyou", sender: self)
+                
+            }
+            
+        }
         
-        self.performSegue(withIdentifier: "Thankyou", sender: self)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -307,5 +307,47 @@ class Model: NSObject, CLLocationManagerDelegate {
         task.resume()
     }
     
+    func purchase(product: Product, quantity: Int, total: Double, material: String, painting: String) -> Bool{
+        
+        var success = false
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        var urlString = "http://partiklezoo.com/3dprinting/?action=purchase&"
+        urlString += product.uid + "=" + String(quantity)
+        urlString += "&total=" + String(total)
+        urlString += "&material=" + material
+        urlString += "&painting=" + painting
+        
+        let url = NSURL(string: urlString)
+        
+        print(url?.absoluteString ?? "URL error")
+        
+        let config = URLSessionConfiguration.default
+        config.isDiscretionary = true
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: url! as URL, completionHandler:
+        {(data, response, error) in
+            
+            let json = JSON(data: data!)
+            
+            let successString = json["success"].string
+            
+            print (json)
+            
+            if successString == "true" {
+                success = true
+            }
+            group.leave()
+            
+        })
+        task.resume()
+        
+        group.wait()
+        
+        return success
+    }
+    
     
 }
