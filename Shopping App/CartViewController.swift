@@ -26,12 +26,16 @@ class CartViewContoller: DetailViewController, UITableViewDataSource, UITableVie
         displayTotal()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.cart.count
+        return self.model.cart.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,8 +59,8 @@ class CartViewContoller: DetailViewController, UITableViewDataSource, UITableVie
         if editingStyle == UITableViewCellEditingStyle.delete {
             let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             managedContext.delete(model.storedCart[indexPath.row])
-            model.storedCart.remove(at: indexPath.row)
-            model.cart.remove(at: indexPath.row)
+            self.model.storedCart.remove(at: indexPath.row)
+            self.model.cart.remove(at: indexPath.row)
             
             do
             {

@@ -44,6 +44,14 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
         self.view.endEditing(true)
     }
     
+    func configureCheckout() {
+        
+        pickerPickupPoint.selectedRow(inComponent: 0)
+        
+        labelTotalPrice.text = "$" + String(format: "%.2f", model.calculateCartTotal())
+        
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -71,14 +79,6 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return model.pickUpLocations[row]["street"]! + ", " + model.pickUpLocations[row]["suburb"]!
-    }
-    
-    func configureCheckout() {
-        
-        pickerPickupPoint.selectedRow(inComponent: 0)
-        
-        labelTotalPrice.text = "$" + String(format: "%.2f", model.calculateCartTotal())
-        
     }
     
     @IBAction func payNow(_ sender: Any) {
@@ -137,7 +137,7 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
     
     func checkout() {
         
-        var success = false
+        var success = true
         
         for count in 0...self.model.cart.count - 1 {
             
@@ -148,31 +148,34 @@ class CheckoutViewController: DetailViewController, UITableViewDataSource, UITab
             let painting = self.model.cart[count][2] == 0.0 ? "false" : "true"
             
             
-            success = self.model.purchase(product: product, quantity: quantity, total: total, material: material, painting: painting)
+            let temp = self.model.purchase(product: product, quantity: quantity, total: total, material: material, painting: painting)
             
-            if !success {
-                let error = "Oops! Something went wrong. Please try again later."
-                showAlertMsg("Error", message: error, style: UIAlertControllerStyle.alert)
-                
-            } else {
-                print("Success! Checkout complete.")
-                
-                self.cardNumber.text = ""
-                self.cardExpiryMonth.text = ""
-                self.cardExpiryYear.text = ""
-                self.cardCvv.text = ""
-                
-                self.labelTotalPrice.text = "$0.00"
-                
-                self.model.clearCart()
-                self.tableViewOrderDetails.reloadData()
-                
-                self.performSegue(withIdentifier: "Thankyou", sender: self)
-                
+            if !temp {
+                success = false
             }
             
         }
         
+        if !success {
+            let error = "Oops! Something went wrong. Please try again later."
+            showAlertMsg("Error", message: error, style: UIAlertControllerStyle.alert)
+            
+        } else {
+            print("Success! Checkout complete.")
+            
+            self.cardNumber.text = ""
+            self.cardExpiryMonth.text = ""
+            self.cardExpiryYear.text = ""
+            self.cardCvv.text = ""
+            
+            self.labelTotalPrice.text = "$0.00"
+            
+            self.model.clearCart()
+            self.tableViewOrderDetails.reloadData()
+            
+            self.performSegue(withIdentifier: "Thankyou", sender: self)
+            
+        }
         
     }
     
