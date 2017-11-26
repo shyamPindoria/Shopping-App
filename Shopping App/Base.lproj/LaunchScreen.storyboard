@@ -24,11 +24,35 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-FY-E7l">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcG-Iz-8jI">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping App © 2017 Shyam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IJ-qe-Qhw">
+                                        <rect key="frame" x="71.5" y="13" width="231.5" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="3IJ-qe-Qhw" firstAttribute="centerX" secondItem="pcG-Iz-8jI" secondAttribute="centerX" id="9oe-K6-RBV"/>
+                                    <constraint firstItem="3IJ-qe-Qhw" firstAttribute="centerY" secondItem="pcG-Iz-8jI" secondAttribute="centerY" id="KYI-PA-e9H"/>
+                                    <constraint firstAttribute="height" constant="50" id="jk4-rL-MAS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pcG-Iz-8jI" secondAttribute="trailing" id="G9M-a8-M2d"/>
+                            <constraint firstItem="LuG-FY-E7l" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="LpU-LO-Grh"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="pcG-Iz-8jI" secondAttribute="bottom" id="OTB-NZ-4gZ"/>
+                            <constraint firstAttribute="trailing" secondItem="LuG-FY-E7l" secondAttribute="trailing" id="Q5a-mt-jcv"/>
                             <constraint firstAttribute="trailing" secondItem="LuG-FY-E7l" secondAttribute="trailing" id="STp-0c-IIp"/>
+                            <constraint firstItem="pcG-Iz-8jI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ee6-UF-B6g"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="LuG-FY-E7l" secondAttribute="bottom" id="qZS-FO-cxD"/>
                             <constraint firstItem="LuG-FY-E7l" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="sgJ-0A-SRF"/>
+                            <constraint firstItem="LuG-FY-E7l" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="tns-Ei-z5X"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="LuG-FY-E7l" secondAttribute="bottom" id="udZ-bm-UU5"/>
                             <constraint firstItem="LuG-FY-E7l" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="vl5-T2-jKX"/>
                         </constraints>

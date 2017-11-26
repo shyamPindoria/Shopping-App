@@ -277,7 +277,11 @@ class Model: NSObject, CLLocationManagerDelegate {
         
         self.pickUpLocations.removeAll()
         
-        let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
+        var locValue = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        
+        if let currentLoc = locationManager.location?.coordinate {
+            locValue = currentLoc
+        }
         
         let url = NSURL(string: "http://partiklezoo.com/3dprinting/?action=locations&coord1=\(locValue.latitude)&coord2=\(locValue.longitude)")
         let config = URLSessionConfiguration.default
