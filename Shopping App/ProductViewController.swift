@@ -113,7 +113,7 @@ class ProductViewController: DetailViewController {
         self.present(self.alertController!, animated: true, completion: nil)
     }
     
-    func countDown() {
+    @objc func countDown() {
         
         self.remainingTime -= 1
         if (self.remainingTime < 0) {
